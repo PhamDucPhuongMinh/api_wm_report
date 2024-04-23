@@ -15,8 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.24.4",
+    "async-exit-hook": "^2.0.1",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
