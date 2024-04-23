@@ -1,14 +1,20 @@
 import express from 'express'
-import { CONNECT_DB, GET_DB, CLOSE_DB } from '~/config/mongodb'
 import exitHook from 'async-exit-hook'
 import 'dotenv/config'
+import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
 import env from '~/config/environment'
+import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware'
 
 const START_SERVER = () => {
   const app = express()
 
+  // Enable req.body json data
+  app.use(express.json())
+
+  // Middleware handle concentration error
+  app.use(errorHandlingMiddleware)
+
   app.get('/', async (req, res) => {
-    console.log(await GET_DB().listCollections().toArray())
     res.send('Hello World!')
   })
 
