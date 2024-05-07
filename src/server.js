@@ -5,7 +5,8 @@ import cors from 'cors'
 import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
 import env from '~/config/environment'
 import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware'
-import { corsOptions } from './config/cors'
+import { corsOptions } from '~/config/cors'
+import { APIs_v1 } from '~/routes/v1'
 
 const START_SERVER = () => {
   const app = express()
@@ -18,9 +19,8 @@ const START_SERVER = () => {
   // Middleware handle concentration error
   app.use(errorHandlingMiddleware)
 
-  app.get('/', async (req, res) => {
-    res.send('Hello World!')
-  })
+  // Use APIs V1
+  app.use('/v1', APIs_v1)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
     console.log(`Example app listening on port ${env.APP_PORT}`)
